@@ -1,0 +1,22 @@
+﻿<html>
+<body>
+	Hi,<br />
+	<br />
+	You have had an an enquiry from {{name}}. 
+	<br />
+	<br />
+	There message is below
+	<br />
+	<br />
+	{{message}}
+	<br />
+	<br />
+	You can reply to their email on {{email}} or call them on {{phone}}
+	<br />
+	<br />
+	Thanks
+	<br />
+	<br />
+	<i>{{EmailFooter}}</i>
+</body>
+</html>

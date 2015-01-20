@@ -1,0 +1,29 @@
+$img-layout: vertical;
+$img-spacing: 10px;
+$img-sprite-diemensions: true;
+
+@import "compass/utilities/sprites";
+/*@import "img/*.png";*/
+
+@import
+
+/* Importing compass components */
+/*"compass/reset", 
+"compass/css3", 
+"compass/typography",*/
+
+/* Vendor */
+"vendor/bootstrap",
+
+/* Importing base styles */
+"base/site",
+
+/* Importing widgets styles*/
+
+
+/* Importing layout styles */
+
+
+/* Importing styles for home page */
+"pages/home"
+;

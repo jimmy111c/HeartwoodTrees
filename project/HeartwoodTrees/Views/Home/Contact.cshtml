@@ -1,0 +1,32 @@
+﻿@model HeartwoodTrees.Models.ContactModel
+    
+    
+@using (Html.BeginForm("SendQuery", "Home")) 
+{
+    @Html.AntiForgeryToken()
+        
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            
+			<div class="input-group">
+				@Html.TextBox("name", null, new { id = "customer-name-input", @class="form-control", placeholder="name"})
+			</div>
+
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
+				<span class="input-group-addon" id="basic-addon2">example.com</span>
+			</div>
+
+			<div class="input-group">
+				<span class="input-group-addon">$</span>
+				<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+				<span class="input-group-addon">.00</span>
+			</div>
+
+            <div class="input-group">
+				<input type="submit" value="Send Query" />
+            </div>
+		</div>
+    </div>
+}
