@@ -33,9 +33,9 @@ namespace HeartwoodTrees.Controllers
         }
 
         [HttpPost]
-        public JsonResult SendQuery(Comment comment)
+        public JsonResult SendQuery(QueryModel query)
         {
-            return new JsonResult { Data = new { status = "success" } }; 
+            return new JsonResult { Data = new { success = true, message = "your response has been sent" } }; 
         }
     }
 }
