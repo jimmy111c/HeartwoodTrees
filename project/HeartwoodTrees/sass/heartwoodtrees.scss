@@ -8,8 +8,8 @@ $img-sprite-diemensions: true;
 @import
 
 /* Importing compass components */
-/*"compass/reset", 
-"compass/css3", 
+/*"compass/reset",
+"compass/css3",
 "compass/typography",*/
 
 /* Vendor */
@@ -25,5 +25,6 @@ $img-sprite-diemensions: true;
 
 
 /* Importing styles for home page */
-"pages/home"
+"pages/home",
+"pages/contact"
 ;

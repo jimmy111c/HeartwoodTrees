@@ -24,8 +24,6 @@ namespace HeartwoodTrees.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -34,9 +32,10 @@ namespace HeartwoodTrees.Controllers
             return this.View();
         }
 
-        public ActionResult SendQuery(ContactModel model)
+        [HttpPost]
+        public JsonResult SendQuery(Comment comment)
         {
-            return null;
+            return new JsonResult { Data = new { status = "success" } }; 
         }
     }
 }
