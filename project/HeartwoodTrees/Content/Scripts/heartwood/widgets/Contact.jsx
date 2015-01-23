@@ -1,27 +1,55 @@
-var SuccessMessage = React.createClass({
+var SuccessNotification = React.createClass({
 	render: function() {
 		return (
-			<div className="comment">
-				<h2 className="commentAuthor">
-					Sucess Title
-				</h2>
-				{this.props.notification.message}
+			<div className="alert alert-success" role="alert">
+				<strong>Success!</strong> {this.props.message}
 			</div>
-		);
-	}
-});
-
-var Notification = React.createClass({
-	render: function() {
-		return (
-			<SuccessMessage notification={this.props.notification}/>
 		);
 	}
 })﻿;
 
+var ErrorNotification = React.createClass({
+	render: function() {
+		return (
+			<div className="alert alert-danger" role="alert">
+				<strong>Oops, something went wrong!</strong> {this.props.message}
+			</div>
+		);
+	}
+})﻿;
+
+var Notification = React.createClass({
+	render: function() {
+		var notifications;
+		var isSuccess = this.props.notification.status;
+		if(isSuccess) {
+			notifications = <SuccessNotification message={this.props.notification.message}/>;
+		} else {
+			notifications = <ErrorNotification message={this.props.notification.message}/>;
+		}
+		return (
+			notifications
+		);
+	}
+});
+
 var ContactForm = React.createClass({
+
+	loadingButton: function () {
+		var buttonNode = this.refs.sendButton.getDOMNode();
+		$(buttonNode).button('loading')
+	},
+
+	resetButton: function() {
+		var buttonNode = this.refs.sendButton.getDOMNode();
+		$(buttonNode).button('reset')
+	},
+
 	handleSubmit: function(e) {
 		e.preventDefault();
+
+		this.loadingButton();
+
 		var name = this.refs.customerName.getDOMNode().value.trim();
 		var email = this.refs.emailAddress.getDOMNode().value.trim();
 		var phone = this.refs.phoneNumber.getDOMNode().value.trim();
@@ -29,7 +57,7 @@ var ContactForm = React.createClass({
 		if (!name || !query || (!phone || !query)) {
 			return;
 		}
-		this.props.onQuerySubmit({name: name, email: email, phone: phone, query: query});
+		this.props.onQuerySubmit({ query: {Name: name, Email: email, Phone: phone, Query: query}});
 		return;
 	},
 
@@ -52,7 +80,7 @@ var ContactForm = React.createClass({
 					<label for="customer-message-input">query</label>
 					<textarea id="customer-message-input" className="form-control" rows="5" placeholder="your query" ref="customerQuery" required />
 				</div>
-				<button type="submit" className="btn btn-default">Send Query</button>
+				<button type="submit" className="btn btn-primary" data-loading-text="Sending..." ref="sendButton">Send Query</button>
 			</form>
 		);
 	}
@@ -60,7 +88,7 @@ var ContactForm = React.createClass({
 
 var ContactBox = React.createClass({
 	getInitialState: function() {
-		return { notification: {} };
+		return { notification: {}, displayNotification: false };
 	},
 	handleQuerySubmit: function(message) {
 		var self = this;
@@ -68,26 +96,37 @@ var ContactBox = React.createClass({
 			type: 'POST',
 			data: JSON.stringify(message),
 			url: this.props.submitUrl,
+			dataType: 'json',
 			contentType: 'application/json',
-			dataType: 'json'
 		}).done(function (response) {
-			self.setState({ notification: response });
+			self.setState({ notification: response, displayNotification: true });
 		}).fail(function (jqXHR, textStatus, errorThrown) {
-			self.setState({ notification: response });
+			self.contactForm.resetButton();
+			self.setState({ notification: {status: false, message: textStatus}, displayNotification: true });
 		});
 	},
 	render: function() {
+		var alert,
+				form;
+		if(this.state.displayNotification) {
+			alert = <Notification notification={this.state.notification} />
+		}
+
+		form = <ContactForm onQuerySubmit={this.handleQuerySubmit} />;
+		if(this.state.notification.success) {
+			form = null;
+		}
+
 		return (
-			<div classname="contact-container">
-				<h1>Contact</h1>
-        		<ContactForm onQuerySubmit={this.handleQuerySubmit} />
-				<Notification notification={this.state.notification} />
+			<div classname='contact-container'>
+				{form}
+				{alert}
 			</div>
 		);
 	}
 });
 
 React.render(
-	<ContactBox submitUrl="sendQuery/"/>,
+	<ContactBox submitUrl='sendQuery/'/>,
 	document.getElementById('contact')
 );

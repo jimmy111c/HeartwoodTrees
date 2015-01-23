@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace HeartwoodTrees.Controllers
 {
+    using HeartwoodTrees.Business.Notifications;
     using HeartwoodTrees.Models;
 
     public class HomeController : Controller
@@ -35,7 +36,11 @@ namespace HeartwoodTrees.Controllers
         [HttpPost]
         public JsonResult SendQuery(QueryModel query)
         {
-            return new JsonResult { Data = new { success = true, message = "your response has been sent" } }; 
+            //throw new Exception();
+            var notificationService = new CustomerQueryEmailService();
+            notificationService.SendNotification(new EmailAddress { Address = "jimmy111c@hotmail.com", Name = "james" }, query);
+
+            return new JsonResult { Data = new { status = true, message = "your response has been sent" } };
         }
     }
 }

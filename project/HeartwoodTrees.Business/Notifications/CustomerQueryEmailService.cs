@@ -11,12 +11,10 @@ namespace HeartwoodTrees.Business.Notifications
 {
     using System;
 
-    using HeartwoodTrees.Business;
-
     /// <summary>
     /// The reset password email notification service.
     /// </summary>
-    internal class CustomerQueryEmailService
+    public class CustomerQueryEmailService
     {
         /// <summary>
         /// The send notification.
@@ -29,32 +27,25 @@ namespace HeartwoodTrees.Business.Notifications
         /// </param>
         public void SendNotification(EmailAddress emailAddress, object model)
         {
-            string configCountryPrefix = ConfigProvider.GetConfigCountryPrefix();
-            var from = new EmailAddress(ConfigReader.ReadConfigSetting(configCountryPrefix+ "SupportEmailAddress"));
-            string smtpServer = ConfigReader.ReadConfigSetting(configCountryPrefix + "SMTPServer");
+            var from = new EmailAddress(ConfigReader.ReadConfigSetting("ContactEmailAddress"));
+            var smtpServer = ConfigReader.ReadConfigSetting("SMTPServer");
 
-            bool enableSSL = false;
-            if (smtpServer.Contains("gmail"))
-            {
-                enableSSL = true; 
-            }
+            var enableSsl = smtpServer.Contains("gmail");
 
             var notificationService = new EmailNotificationService(
                 @from,
                 new SmtpConfig
                     {
                         Host = smtpServer,
-                        UserName = ConfigReader.ReadConfigSetting(configCountryPrefix + "SupportEmailAddress"),
-                        Password = ConfigReader.ReadConfigSetting(configCountryPrefix + "SupportEmailPassword"),
+                        UserName = ConfigReader.ReadConfigSetting("ContactEmailAddress"),
+                        Password = ConfigReader.ReadConfigSetting("ContactEmailPassword"),
                         Port = 587,
-                        EnableSsl = enableSSL
+                        EnableSsl = enableSsl
                     });
-
-            string DomainNameForEmails = ConfigReader.ReadConfigSetting(configCountryPrefix + "DomainName");
 
             var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin/Notifications/Templates/CustomerEnquiry.txt");
             var fileNotificationContentService = new FileNotificationContentService(path);
-            notificationService.SendNotification(emailAddress, DomainNameForEmails + " - New User", fileNotificationContentService, model, true);
+            notificationService.SendNotification(emailAddress, "New Customer Query", fileNotificationContentService, model);
         }
     }
 }

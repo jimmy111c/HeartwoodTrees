@@ -64,18 +64,13 @@ namespace HeartwoodTrees.Business.Notifications
         /// <param name="message">
         /// The message.
         /// </param>
-        public void SendNotification(EmailAddress toAddress, string subject, string message, bool sendCopy)
+        public void SendNotification(EmailAddress toAddress, string subject, string message)
         {
             ArgumentAssert.IsNotNull(toAddress, "toAddress");
             ArgumentAssert.IsNotNullOrEmpty(subject, "subject");
             ArgumentAssert.IsNotNullOrEmpty(message, "message");
 
             var mm = new MailMessage(this.fromAddress.FullEmailAddress(), toAddress.FullEmailAddress(), subject, message) { IsBodyHtml = true };
-
-            if (sendCopy)
-            {
-                mm.Bcc.Add(new MailAddress(ConfigReader.ReadConfigSetting(ConfigProvider.GetConfigCountryPrefix() + "ErrorEmailAddress")));
-            }
 
             this.smtpClient.Send(mm);
         }
@@ -95,13 +90,10 @@ namespace HeartwoodTrees.Business.Notifications
         /// <param name="model">
         /// The model.
         /// </param>
-        /// <param name="sendCopy">
-        /// Sends a copy of the email to eyedentify admin.
-        /// </param>
-        public void SendNotification(EmailAddress toAddress, string subject, FileNotificationContentService fileNotificationContentService, object model, bool sendCopy)
+        public void SendNotification(EmailAddress toAddress, string subject, FileNotificationContentService fileNotificationContentService, object model)
         {
             ArgumentAssert.IsNotNull(fileNotificationContentService, "fileNotificationContentService");
-            this.SendNotification(toAddress, subject, fileNotificationContentService.GetContent(model), sendCopy);
+            this.SendNotification(toAddress, subject, fileNotificationContentService.GetContent(model));
         }
     }
 }
