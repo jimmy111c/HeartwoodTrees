@@ -13,7 +13,8 @@ requirejs.config({
 		jquery: 'lib/jquery/jquery.min',
 		react: 'lib/react/react',
 		jsx: 'lib/react/JSXTransformer',
-		bootstrap: 'lib/bootstrap/bootstrap.min'
+		bootstrap: 'lib/bootstrap/bootstrap.min',
+		underscore: 'lib/underscore/underscore-min'
 	},
 
 	shim: {

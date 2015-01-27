@@ -1,43 +1,10 @@
 define(function (require) {
 
 	 var $ = require('jquery'),
-    	 React = require('react'),
-		 Bootstrap = require('bootstrap');
-
-	var SuccessNotification = React.createClass({displayName: "SuccessNotification",
-		render: function() {
-			return (
-				React.createElement("div", {className: "alert alert-success", role: "alert"}, 
-					React.createElement("strong", null, "Success!"), " ", this.props.message
-				)
-			);
-		}
-	})﻿;
-
-	var ErrorNotification = React.createClass({displayName: "ErrorNotification",
-		render: function() {
-			return (
-				React.createElement("div", {className: "alert alert-danger", role: "alert"}, 
-					React.createElement("strong", null, "Oops, something went wrong!"), " ", this.props.message
-				)
-			);
-		}
-	})﻿;
-
-	var Notification = React.createClass({displayName: "Notification",
-		render: function() {
-			var notifications,
-				isSuccess = this.props.notification.status;
-			if(isSuccess) {
-				notifications = React.createElement(SuccessNotification, {message: this.props.notification.message});
-			} else {
-				notifications = React.createElement(ErrorNotification, {message: this.props.notification.message});
-			}
-			return (
-				notifications
-			);
-		}
-	});
+			React = require('react'),
+		  Bootstrap = require('bootstrap'),
+			_ = require('underscore'),
+			Notification = require('./Notification');
 
 	var ContactForm = React.createClass({displayName: "ContactForm",
 
@@ -107,8 +74,12 @@ define(function (require) {
 			}).done(function (response) {
 				self.setState({ notification: response, isNotificationVisible: true, isFormVisible: false });
 			}).fail(function (jqXHR, textStatus, errorThrown) {
+				var errors = jqXHR.responseJSON.errors || [];
+				if(jqXHR.responseJSON.error) {
+					errors.push(jqXHR.responseJSON.error);
+				}
 				self.refs.contactForm.resetButton()
-				self.setState({ notification: {status: false, message: jqXHR.responseJSON.error}, isNotificationVisible: true });
+				self.setState({ notification: {status: false, errors: errors}, isNotificationVisible: true });
 			});
 		},
 		render: function() {
@@ -139,4 +110,5 @@ define(function (require) {
 			document.getElementById('contact')
 		);
 	});
+
 });

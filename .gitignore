@@ -122,3 +122,4 @@ teamcity-info.xml
 .gitconfig
 
 *.min.js
+project/HeartwoodTrees/Content/Scripts/.module-cache/*

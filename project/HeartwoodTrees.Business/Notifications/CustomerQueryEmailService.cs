@@ -29,6 +29,7 @@ namespace HeartwoodTrees.Business.Notifications
         /// </param>
         public void SendNotification(IQueryDetails details)
         {
+            //throw new Exception("blah blah");
             ArgumentAssert.IsNotNull(details, "details");
 
             var validator = new QueryDetailsValidation();

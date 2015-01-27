@@ -1,43 +1,10 @@
 define(function (require) {
 
 	 var $ = require('jquery'),
-    	 React = require('react'),
-		 Bootstrap = require('bootstrap');
-
-	var SuccessNotification = React.createClass({
-		render: function() {
-			return (
-				<div className="alert alert-success" role="alert">
-					<strong>Success!</strong> {this.props.message}
-				</div>
-			);
-		}
-	})﻿;
-
-	var ErrorNotification = React.createClass({
-		render: function() {
-			return (
-				<div className="alert alert-danger" role="alert">
-					<strong>Oops, something went wrong!</strong> {this.props.message}
-				</div>
-			);
-		}
-	})﻿;
-
-	var Notification = React.createClass({
-		render: function() {
-			var notifications,
-				isSuccess = this.props.notification.status;
-			if(isSuccess) {
-				notifications = <SuccessNotification message={this.props.notification.message}/>;
-			} else {
-				notifications = <ErrorNotification message={this.props.notification.message}/>;
-			}
-			return (
-				notifications
-			);
-		}
-	});
+			React = require('react'),
+		  Bootstrap = require('bootstrap'),
+			_ = require('underscore'),
+			Notification = require('./Notification');
 
 	var ContactForm = React.createClass({
 
@@ -107,8 +74,12 @@ define(function (require) {
 			}).done(function (response) {
 				self.setState({ notification: response, isNotificationVisible: true, isFormVisible: false });
 			}).fail(function (jqXHR, textStatus, errorThrown) {
+				var errors = jqXHR.responseJSON.errors || [];
+				if(jqXHR.responseJSON.error) {
+					errors.push(jqXHR.responseJSON.error);
+				}
 				self.refs.contactForm.resetButton()
-				self.setState({ notification: {status: false, message: jqXHR.responseJSON.error}, isNotificationVisible: true });
+				self.setState({ notification: {status: false, errors: errors}, isNotificationVisible: true });
 			});
 		},
 		render: function() {
@@ -139,4 +110,5 @@ define(function (require) {
 			document.getElementById('contact')
 		);
 	});
+
 });
