@@ -27,25 +27,32 @@ namespace HeartwoodTrees.Business.Notifications
         /// </param>
         public void SendNotification(EmailAddress emailAddress, object model)
         {
-            var from = new EmailAddress(ConfigReader.ReadConfigSetting("ContactEmailAddress"));
-            var smtpServer = ConfigReader.ReadConfigSetting("SMTPServer");
+            try
+            {
+                var from = new EmailAddress(ConfigReader.ReadConfigSetting("ContactEmailAddress"));
+                var smtpServer = ConfigReader.ReadConfigSetting("SMTPServer");
 
-            var enableSsl = smtpServer.Contains("gmail");
+                var enableSsl = smtpServer.Contains("gmail");
 
-            var notificationService = new EmailNotificationService(
-                @from,
-                new SmtpConfig
-                    {
-                        Host = smtpServer,
-                        UserName = ConfigReader.ReadConfigSetting("ContactEmailAddress"),
-                        Password = ConfigReader.ReadConfigSetting("ContactEmailPassword"),
-                        Port = 587,
-                        EnableSsl = enableSsl
-                    });
+                var notificationService = new EmailNotificationService(
+                    @from,
+                    new SmtpConfig
+                        {
+                            Host = smtpServer,
+                            UserName = ConfigReader.ReadConfigSetting("ContactEmailAddress"),
+                            Password = ConfigReader.ReadConfigSetting("ContactEmailPassword"),
+                            Port = 587,
+                            EnableSsl = enableSsl
+                        });
 
-            var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin/Notifications/Templates/CustomerEnquiry.txt");
-            var fileNotificationContentService = new FileNotificationContentService(path);
-            notificationService.SendNotification(emailAddress, "New Customer Query", fileNotificationContentService, model);
+                var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin/Notifications/Templates/CustomerEnquiry.txt");
+                var fileNotificationContentService = new FileNotificationContentService(path);
+                notificationService.SendNotification(emailAddress, "New Customer Query", fileNotificationContentService, model);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Your query failed to send, please try again. If the problem persists contact us at heartwoodtreesltd@gmail.com");
+            }
         }
     }
 }

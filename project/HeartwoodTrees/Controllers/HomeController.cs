@@ -36,11 +36,10 @@ namespace HeartwoodTrees.Controllers
         [HttpPost]
         public JsonResult SendQuery(QueryModel query)
         {
-            //throw new Exception();
             var notificationService = new CustomerQueryEmailService();
-            notificationService.SendNotification(new EmailAddress { Address = "jimmy111c@hotmail.com", Name = "james" }, query);
+            notificationService.SendNotification(new EmailAddress { Address = query.Email, Name = query.Name }, query);
 
-            return new JsonResult { Data = new { status = true, message = "your response has been sent" } };
+            return new JsonResult { Data = new { status = true, message = "your query has been sent, we will get back to you as soon as possible." } };
         }
     }
 }

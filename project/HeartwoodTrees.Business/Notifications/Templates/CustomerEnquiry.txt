@@ -8,7 +8,7 @@
 	There message is below
 	<br />
 	<br />
-	{{message}}
+	{{query}}
 	<br />
 	<br />
 	You can reply to their email on {{email}} or call them on {{phone}}
