@@ -1,10 +1,4 @@
-define(function (require) {
-
-	 var $ = require('jquery'),
-			React = require('react'),
-		  Bootstrap = require('bootstrap'),
-			_ = require('underscore'),
-			Notification = require('./Notification');
+define(['react', 'jquery', 'underscore', './Notification', 'bootstrap'], function (React, $, _, Notification) {
 
 	var ContactForm = React.createClass({
 
@@ -110,5 +104,4 @@ define(function (require) {
 			document.getElementById('contact')
 		);
 	});
-
 });
