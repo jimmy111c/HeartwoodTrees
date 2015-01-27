@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="QueryModel.cs" company="">
+// <copyright file="QueryViewModel.cs" company="">
 //   
 // </copyright>
 // <summary>
@@ -7,12 +7,12 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace HeartwoodTrees.Models
+namespace HeartwoodTrees.ViewModels
 {
     /// <summary>
     /// The query model.
     /// </summary>
-    public class QueryModel
+    public class QueryViewModel
     {
         /// <summary>
         /// Gets or sets the name.

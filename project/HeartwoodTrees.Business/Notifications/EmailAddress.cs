@@ -1,6 +1,6 @@
 ﻿namespace HeartwoodTrees.Business.Notifications
 {
-    public class EmailAddress
+    public class EmailAddress : IEmailAddress
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EmailAddress"/> class.
@@ -30,16 +30,5 @@
         /// Gets or sets the name.
         /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// The full email address.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public string FullEmailAddress()
-        {
-            return string.IsNullOrWhiteSpace(this.Name) ? this.Address : string.Format("{0} <{1}>", this.Name, this.Address);
-        }
     }
 }

@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Nustache.Core">
       <HintPath>..\packages\Nustache.1.13.8.22\lib\net20\Nustache.Core.dll</HintPath>
     </Reference>
@@ -47,11 +50,17 @@
     <Compile Include="BusinessValidationException.cs" />
     <Compile Include="ConfigProvider.cs" />
     <Compile Include="Notifications\ConfigReader.cs" />
+    <Compile Include="Notifications\EmailAddressExtensions.cs" />
+    <Compile Include="Notifications\IEmailAddress.cs" />
     <Compile Include="Notifications\EmailAddress.cs" />
     <Compile Include="Notifications\EmailNotificationService.cs" />
     <Compile Include="Notifications\CustomerQueryEmailService.cs" />
     <Compile Include="Notifications\FileNotificationContentService.cs" />
+    <Compile Include="Notifications\IQueryDetails.cs" />
+    <Compile Include="Notifications\QueryDetails.cs" />
     <Compile Include="Notifications\SmtpConfig.cs" />
+    <Compile Include="Notifications\Validation\EmailAddressValidator.cs" />
+    <Compile Include="Notifications\Validation\QueryDetailsValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -108,7 +108,7 @@ define(function (require) {
 				self.setState({ notification: response, isNotificationVisible: true, isFormVisible: false });
 			}).fail(function (jqXHR, textStatus, errorThrown) {
 				self.refs.contactForm.resetButton()
-				self.setState({ notification: {status: false, message: textStatus}, isNotificationVisible: true });
+				self.setState({ notification: {status: false, message: jqXHR.responseJSON.error}, isNotificationVisible: true });
 			});
 		},
 		render: function() {
@@ -125,6 +125,7 @@ define(function (require) {
 
 			return (
 				<div classname='contact-container'>
+					<h1 className='contact-header'>contact us</h1>
 					{alert}
 					{form}
 				</div>

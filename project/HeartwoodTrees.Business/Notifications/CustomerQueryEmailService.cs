@@ -11,6 +11,11 @@ namespace HeartwoodTrees.Business.Notifications
 {
     using System;
 
+    using FluentValidation;
+
+    using HeartwoodTrees.Business.Asserts;
+    using HeartwoodTrees.Business.Notifications.Validation;
+
     /// <summary>
     /// The reset password email notification service.
     /// </summary>
@@ -19,14 +24,16 @@ namespace HeartwoodTrees.Business.Notifications
         /// <summary>
         /// The send notification.
         /// </summary>
-        /// <param name="emailAddress">
-        /// The email Address.
+        /// <param name="details">
+        /// The query Details.
         /// </param>
-        /// <param name="model">
-        /// The model.
-        /// </param>
-        public void SendNotification(EmailAddress emailAddress, object model)
+        public void SendNotification(IQueryDetails details)
         {
+            ArgumentAssert.IsNotNull(details, "details");
+
+            var validator = new QueryDetailsValidation();
+            validator.ValidateAndThrow(details);
+
             try
             {
                 var from = new EmailAddress(ConfigReader.ReadConfigSetting("ContactEmailAddress"));
@@ -47,7 +54,7 @@ namespace HeartwoodTrees.Business.Notifications
 
                 var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin/Notifications/Templates/CustomerEnquiry.txt");
                 var fileNotificationContentService = new FileNotificationContentService(path);
-                notificationService.SendNotification(emailAddress, "New Customer Query", fileNotificationContentService, model);
+                notificationService.SendNotification(details.Email, "New Customer Query", fileNotificationContentService, details);
             }
             catch (Exception)
             {

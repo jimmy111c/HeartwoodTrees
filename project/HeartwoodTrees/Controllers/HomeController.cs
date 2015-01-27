@@ -7,7 +7,8 @@ using System.Web.Mvc;
 namespace HeartwoodTrees.Controllers
 {
     using HeartwoodTrees.Business.Notifications;
-    using HeartwoodTrees.Models;
+    using HeartwoodTrees.ViewModels;
+    using HeartwoodTrees.ViewModels.Contact;
 
     public class HomeController : Controller
     {
@@ -34,10 +35,10 @@ namespace HeartwoodTrees.Controllers
         }
 
         [HttpPost]
-        public JsonResult SendQuery(QueryModel query)
+        public JsonResult SendQuery(QueryViewModel query)
         {
             var notificationService = new CustomerQueryEmailService();
-            notificationService.SendNotification(new EmailAddress { Address = query.Email, Name = query.Name }, query);
+            notificationService.SendNotification(query.Model());
 
             return new JsonResult { Data = new { status = true, message = "your query has been sent, we will get back to you as soon as possible." } };
         }

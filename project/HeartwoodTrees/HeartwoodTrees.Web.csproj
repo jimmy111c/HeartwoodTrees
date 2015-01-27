@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="JavaScriptEngineSwitcher.Core">
       <HintPath>..\packages\JavaScriptEngineSwitcher.Core.1.2.0\lib\net40\JavaScriptEngineSwitcher.Core.dll</HintPath>
     </Reference>
@@ -142,15 +145,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\CustomErrorHandlerAttribute.cs" />
     <Compile Include="App_Start\ReactConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\QueryModel.cs" />
-    <Compile Include="Models\ContactModel.cs" />
+    <Compile Include="ViewModels\Contact\ContactViewModelExtensions.cs" />
+    <Compile Include="ViewModels\Contact\QueryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -183,8 +186,6 @@
     <None Include="Properties\PublishProfiles\heartwoodtreesltd.pubxml" />
     <Content Include="sass\heartwoodtrees.scss" />
     <Content Include="sass\pages\_home.scss" />
-    <Content Include="Scripts\showdown.js" />
-    <Content Include="Scripts\showdown.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -204,6 +205,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\img\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

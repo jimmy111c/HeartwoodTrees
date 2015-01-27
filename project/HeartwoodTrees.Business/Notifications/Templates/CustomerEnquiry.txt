@@ -5,13 +5,10 @@
 	You have had an an enquiry from {{name}}. 
 	<br />
 	<br />
-	There message is below
-	<br />
-	<br />
 	{{query}}
 	<br />
 	<br />
-	You can reply to their email on {{email}} or call them on {{phone}}
+	You can reply to their email on <a href="mailto:{{email}}" target="_top">{{email}}</a> or call them on {{phone}}
 	<br />
 	<br />
 	Thanks
