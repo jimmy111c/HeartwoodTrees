@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CustomerQueryEmailService.cs" company="Heartwood Trees Ltd Limited">
-//   Copyright © heartwoodtreesltd.co.nz. All rights reserved.
+// <copyright file="CustomerQueryEmailService.cs" company="">
+//   
 // </copyright>
 // <summary>
-//   Defines the CustomerQueryEmailService type.
+//   The reset password email notification service.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -29,7 +29,6 @@ namespace HeartwoodTrees.Business.Notifications
         /// </param>
         public void SendNotification(IQueryDetails details)
         {
-            //throw new Exception("blah blah");
             ArgumentAssert.IsNotNull(details, "details");
 
             var validator = new QueryDetailsValidation();
@@ -55,7 +54,8 @@ namespace HeartwoodTrees.Business.Notifications
 
                 var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin/Notifications/Templates/CustomerEnquiry.txt");
                 var fileNotificationContentService = new FileNotificationContentService(path);
-                notificationService.SendNotification(details.Email, "New Customer Query", fileNotificationContentService, details);
+                var model = new { details.Name, Query = details.Message, Email = details.Email.Address, details.Phone };
+                notificationService.SendNotification(details.Email, string.Format("New Customer Query from {0}", details.Name), fileNotificationContentService, model);
             }
             catch (Exception)
             {

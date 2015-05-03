@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EmailNotificationService.cs" company="Heartwood Trees Ltd Limited">
-//   Copyright © heartwoodtreesltd.co.nz. All rights reserved.
+// <copyright file="EmailNotificationService.cs" company="Heartwood Trees Limited">
+//   Copyright © heartwoodtressltd.co.nz.  All rights reserved.
 // </copyright>
 // <summary>
 //   Defines the EmailNotificationService type.
@@ -9,7 +9,6 @@
 
 namespace HeartwoodTrees.Business.Notifications
 {
-    using System;
     using System.Net;
     using System.Net.Mail;
 
@@ -84,8 +83,8 @@ namespace HeartwoodTrees.Business.Notifications
         /// <param name="subject">
         /// The subject.
         /// </param>
-        /// <param name="notificationContentService">
-        /// The notification content service.
+        /// <param name="fileNotificationContentService">
+        /// The file Notification Content Service.
         /// </param>
         /// <param name="model">
         /// The model.
