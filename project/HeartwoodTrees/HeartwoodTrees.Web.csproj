@@ -157,8 +157,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\Scripts\heartwood\widgets\contact.jsx" />
-    <None Include="Content\Scripts\heartwood\widgets\contact.js" />
+    <Content Include="Content\Scripts\heartwood\widgets\contact.jsx" />
+    <Content Include="Content\Scripts\heartwood\widgets\contact.js" />
+    <Content Include="Content\Scripts\heartwood\widgets\Notification.js" />
     <Content Include="Content\Scripts\lib\jquery\jquery.min.js" />
     <Content Include="Content\Scripts\lib\underscore\underscore-min.js" />
     <Content Include="Content\Scripts\requireConfig.js" />
@@ -170,6 +171,7 @@
     <Content Include="Content\Scripts\lib\require\require.js" />
     <Content Include="sass\pages\_contact.scss" />
     <Content Include="Content\Scripts\lib\underscore\underscore-min.map" />
+    <Content Include="Content\Scripts\heartwood\widgets\Notification.jsx" />
     <None Include="sass\vendor\_bootstrap.scss" />
     <Content Include="Content\Images\arborist.jpg" />
     <Content Include="Content\Images\removal.jpg" />
@@ -188,6 +190,8 @@
     <None Include="Properties\PublishProfiles\heartwoodtreesltd.pubxml" />
     <Content Include="sass\heartwoodtrees.scss" />
     <Content Include="sass\pages\_home.scss" />
+    <Content Include="googleb5690fa158949e0f.html" />
+    <Content Include="sitemap.xml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -203,6 +207,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Services.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Home.cshtml" />
+    <Content Include="Views\Shared\GoogleAnalytics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

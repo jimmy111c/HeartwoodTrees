@@ -10,7 +10,9 @@
 		window.siteRoot = @this.Html.Raw(JsonConvert.SerializeObject(this.Url.Content("~")));
 	</script>
 	<script src="@this.Url.Content("~/Content/Scripts/lib/require/require.js")" type="text/javascript"></script>
-	<script src="@this.Url.Content("~/Content/Scripts/requireConfig.js")" type="text/javascript"></script>
+    <script src="@this.Url.Content("~/Content/Scripts/requireConfig.js")" type="text/javascript"></script>
+	
+	@Html.Partial("GoogleAnalytics")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
