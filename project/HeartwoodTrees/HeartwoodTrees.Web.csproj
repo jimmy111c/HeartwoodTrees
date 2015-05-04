@@ -182,7 +182,7 @@
       <DependentUpon>_home.scss</DependentUpon>
     </Content>
     <Content Include="config.rb" />
-    <None Include="Properties\PublishProfiles\heartwoodtreesltd.pubxml" />
+    <None Include="Properties\PublishProfiles\Prod-Deploy.pubxml" />
     <Content Include="sass\heartwoodtrees.scss" />
     <Content Include="sass\pages\_home.scss" />
     <Content Include="googleb5690fa158949e0f.html" />
