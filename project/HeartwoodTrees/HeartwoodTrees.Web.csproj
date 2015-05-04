@@ -162,7 +162,6 @@
     <Content Include="Content\Scripts\lib\bootstrap\bootstrap.js" />
     <Content Include="Content\Scripts\lib\react\JSXTransformer.js" />
     <Content Include="Content\Scripts\lib\react\react.js" />
-    <Content Include="Content\Scripts\lib\react\react.min.js" />
     <Content Include="Content\Scripts\lib\require\require.js" />
     <Content Include="sass\pages\_contact.scss" />
     <Content Include="Content\Scripts\lib\underscore\underscore-min.map" />
