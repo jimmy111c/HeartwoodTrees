@@ -168,7 +168,7 @@
     <Content Include="sass\pages\_contact.scss" />
     <Content Include="Content\Scripts\lib\underscore\underscore-min.map" />
     <Content Include="Content\Scripts\heartwood\widgets\Notification.jsx" />
-    <None Include="Properties\PublishProfiles\Dev.pubxml" />
+    <None Include="Properties\PublishProfiles\Dev-Deploy.pubxml" />
     <None Include="sass\vendor\_bootstrap.scss" />
     <Content Include="Content\Images\arborist.jpg" />
     <Content Include="Content\Images\removal.jpg" />
