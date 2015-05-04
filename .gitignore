@@ -123,3 +123,4 @@ teamcity-info.xml
 
 *.min.js
 project/HeartwoodTrees/Content/Scripts/.module-cache/*
+project/HeartwoodTrees/artifacts/
